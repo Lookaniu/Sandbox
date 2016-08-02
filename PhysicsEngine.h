@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////////////
+//--- NV Phycis SDK wrapper
+////////////////////////////////////////////////////////////////////////////////
+
+using namespace physx;
+using namespace std;
+
+////////////////////////////////////////////////////////////////////////////////
 class PhysicsEngine
 {
 public:
@@ -14,35 +22,40 @@ public:
     
     bool Initialize()
     {
-        PhysicsSDK = physx::PxCreatePhysics(PX_PHYSICS_VERSION, gDefaultAllocatorCallback, gDefaultErrorCallback, PxTolerancesScale() );
-        if(PhysicsSDK == NULL) 
+        PhysicsSDK = PxCreatePhysics(PX_PHYSICS_VERSION, gDefaultAllocatorCallback, gDefaultErrorCallback, PxTolerancesScale() );
+        if (PhysicsSDK == NULL) 
         {
             return false;
         }
         
         if (!PxInitExtensions(PhysicsSDK))
         {
-            cerr<< "PxInitExtensions failed!" <<endl;
+            cerr << "Extensions initialisation failed!" << endl;
             return false;
         }
         
-    #ifdef _DEBUG
-        PxExtensionVisualDebugger::connect(PhysicsSDK->getPvdConnectionManager(),"localhost",5425, 10000, true);
-    #endif
+    //#ifdef _DEBUG
+    //    PxExtensionVisualDebugger::connect(PhysicsSDK->getPvdConnectionManager(),"localhost",5425, 10000, true);
+    //#endif
 
 
         return true;
     };
     
-    physx::PxSceneDesc CreateScene()
+    PxSceneDesc CreateScene()
     {
         
     };
 protected:
-    std::shared_ptr<physx::PxPhysics> PhysicsSDK;
+    shared_ptr<PxPhysics> PhysicsSDK;
 };
 
+////////////////////////////////////////////////////////////////////////////////
 class Physical
 {
+public:
+    Physical();
     
+    PxShape shape;
 }
+////////////////////////////////////////////////////////////////////////////////
