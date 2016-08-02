@@ -1,3 +1,3 @@
 # Sandnox
-Sandbox
+[Sandbox]
 Just some code
